@@ -1,0 +1,544 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Buchheit Backend API",
+      "description": "This is Buchheit Backend API.",
+      "version": "1.0.0"
+    },
+    "basePath":"/",
+    "schemes": [
+      "http"
+    ],
+    "securityDefinitions":{
+      "bearerAuth":{
+        "type":"apiKey",
+        "name":"Authorization",
+        "scheme":"Bearer",
+        "in":"header",
+        "description": "For accessing the API a valid JWT token must be passed in all the queries in the 'Authorization' header"
+      }
+
+    },
+    "paths": {
+      "/api/v1/index": {
+        "get": {
+          "tags": [
+              "index"
+          ],
+          "security":[
+            {
+              "bearerAuth":[]
+            }
+          ],
+          "summary": "Get list of index",
+          "operationId": "get index",
+          "parameters": [
+          {
+              "name": "limit",
+              "in": "query",
+              "description": "Number of results to return per page.",
+              "required": false,
+              "type": "integer",
+              "items": {
+                  "type": "integer"
+              },
+              "collectionFormat": "csv"
+          },
+          {
+              "name": "offset",
+              "in": "query",
+              "description": "The initial index from which to return the results.",
+              "required": false,
+              "type": "integer",
+              "items": {
+                  "type": "integer"
+              },
+              "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/htmlcreate",
+              "type": "string"
+            }
+          }
+        }
+        }, 
+        "post": {
+          "tags": [
+            "index"
+          ],
+          "security":[
+            {
+              "bearerAuth":[]
+            }
+          ],
+          "summary": "Create a index",
+          "operationId": "create index",
+          "parameters": [
+            {
+              "name": "data",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/htmlcreate"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "schema": {
+                "$ref": "#/definitions/htmlcreate"
+              }
+            },
+            "400": {
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/index/{title}": {
+        "delete": {
+          "tags": [
+            "index"
+          ],
+          "consumes":"application/json",
+          "produces":"application/json",
+          "security":[
+            {
+              "bearerAuth":[]
+            }
+          ],
+          "summary": "delete html by title",
+          "operationId": "delete html by title",
+          "parameters": [
+            {
+                "name": "title",
+                "in": "path",
+                "description": "A unique integer value identifying this html service.",
+                "required": true,
+                "type": "string"
+            }
+          ],
+          "responses": {
+            "400": {
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/page": {
+        "get": {
+          "tags": [
+              "page"
+          ],
+          "security":[
+            {
+              "bearerAuth":[]
+            }
+          ],
+          "summary": "Get list of page",
+          "operationId": "get page",
+          "parameters": [
+          {
+              "name": "limit",
+              "in": "query",
+              "description": "Number of results to return per page.",
+              "required": false,
+              "type": "integer",
+              "items": {
+                  "type": "integer"
+              },
+              "collectionFormat": "csv"
+          },
+          {
+              "name": "offset",
+              "in": "query",
+              "description": "The initial index from which to return the results.",
+              "required": false,
+              "type": "integer",
+              "items": {
+                  "type": "integer"
+              },
+              "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/pagecreate",
+              "type": "string"
+            }
+          }
+        }
+        }, 
+        "post": {
+          "tags": [
+            "page"
+          ],
+          "security":[
+            {
+              "bearerAuth":[]
+            }
+          ],
+          "summary": "Create a page",
+          "operationId": "create page",
+          "parameters": [
+            {
+              "name": "data",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/pagecreate"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "schema": {
+                "$ref": "#/definitions/pagecreate"
+              }
+            },
+            "400": {
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/page/bulk": {
+        "post": {
+          "tags": [
+            "page bulk update"
+          ],
+          "security":[
+            {
+              "bearerAuth":[]
+            }
+          ],
+          "summary": "page bulk update",
+          "operationId": "page bulk update",
+          "parameters": [
+            {
+              "name": "data",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/pageupdatebulk"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "schema": {
+                "$ref": "#/definitions/pagecreate"
+              }
+            },
+            "400": {
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/page/{_id}": {
+        "get": {
+          "tags": [
+            "page"
+          ],
+          "consumes":"application/json",
+          "produces":"application/json",
+          "security":[
+            {
+              "bearerAuth":[]
+            }
+          ],
+          "summary": "Get page by id",
+          "operationId": "get page by id",
+          "parameters": [
+            {
+              "name": "limit",
+              "in": "query",
+              "description": "Number of results to return per page.",
+              "required": false,
+              "type": "integer",
+              "items": {
+                "type": "integer"
+              }
+            },
+            {
+                "name": "offset",
+                "in": "query",
+                "description": "The initial index from which to return the results.",
+                "required": false,
+                "type": "integer",
+                "items": {
+                  "type": "integer"
+                }
+            },
+            {
+                "name": "_id",
+                "in": "path",
+                "description": "A unique integer value identifying this workgroup.",
+                "required": true,
+                "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "schema": {
+                "$ref": "#/definitions/pagecreate",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "page"
+          ],
+          "consumes":"application/json",
+          "produces":"application/json",
+          "security":[
+            {
+              "bearerAuth":[]
+            }
+          ],
+          "summary": "delete page by id",
+          "operationId": "delete page by id",
+          "parameters": [
+            {
+                "name": "_id",
+                "in": "path",
+                "description": "A unique integer value identifying this workgroup.",
+                "required": true,
+                "type": "integer"
+            }
+          ],
+          "responses": {
+            "400": {
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/page/{section_id}": {
+        "put": {
+          "tags": [
+            "page"
+          ],
+          "consumes":"application/json",
+          "produces":"application/json",
+          "security":[
+            {
+              "bearerAuth":[]
+            }
+          ],
+          "summary": "update page by id",
+          "operationId": "update page by id",
+          "parameters": [
+            {
+              "name": "data",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/pageupdate"
+              }
+            },
+            {
+                "name": "section_id",
+                "in": "path",
+                "description": "A unique string value identifying this page.",
+                "required": true,
+                "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "schema": {
+                "$ref": "#/definitions/pageupdate",
+                "type": "string"
+              }
+            },
+            "400": {
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/fileupload/{folder_name}": {
+        "post": {
+          "tags": [
+            "fileupload"
+          ],
+          "consumes":"multipart/form-data",
+          "security":[
+            {
+              "bearerAuth":[]
+            }
+          ],
+          "summary": "file upload",
+          "operationId": "file upload",
+          "parameters": [
+            {
+              "name": "file",
+              "in": "formData",
+              "type":"file",
+              "required": true,
+              "description":"The file to upload."
+            },
+            {
+                "name": "folder_name",
+                "in": "path",
+                "description": "folder name.",
+                "required": true,
+                "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "schema": {
+                "$ref": "#/definitions/fileupload",
+                "type": "string"
+              }
+            },
+            "400": {
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        }
+      }
+    },
+    "responses":{
+      "NotFound":{
+        "description":"The specified resource was not found"
+      }
+    },
+    "definitions": {
+      "htmlcreate": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "html": {
+            "type": "string"
+          }
+        }
+      },
+      "pagecreate": {
+        "type": "object",
+        "properties": {
+          "section_id": {
+            "type": "string"
+          },
+          "sec_order": {
+            "type": "integer"
+          },
+          "section_type": {
+            "type": "string"
+          },
+          "section_props": {
+            "type": "string"
+          },
+          "section_props_previous": {
+            "type": "string"
+          }
+        }
+      },
+      "pageupdate": {
+        "type": "object",
+        "properties": {
+          "sec_order": {
+            "type": "integer"
+          },
+          "section_type": {
+            "type": "string"
+          },
+          "is_active":{
+            "type": "integer"
+          },
+          "scheduler_state":{
+            "type": "integer"
+          },
+          "section_props": {
+            "type": "string"
+          },
+          "section_props_previous": {
+            "type": "string"
+          }
+        }
+      },
+      "pageupdatebulk": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string"
+          }
+        }
+      },
+      "fileupload": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "Deleted": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "string"
+          }
+        }
+      },
+      "ApiResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "type": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "UnauthorizedError":{
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
